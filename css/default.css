@@ -1,0 +1,13 @@
+.centered-text {
+    text-align:center
+}
+
+body {
+    background-color: #000000;
+}
+
+.top-level {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+}

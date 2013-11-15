@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Suns: The Structural Search Engine</title>
+<link href="/css/bootstrap.css" rel="stylesheet" media="screen">
+<link href="/css/font-awesome.css" rel="stylesheet">
+<link href="/css/default.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<div class="container top-level">
+<div class="row">
+<div class="span9">
+<h1>Suns: The Structural Search Engine</h1>
+<br />
+<code>Suns</code> provides the missing search engine for the Protein Data Bank
+complete with a <code>PyMOL</code> interface:<br />
+<br />
+<ul>
+<li> Point and click within <code>PyMOL</code> to build search queries
+<li> Search for sophisticated all-atom motifs
+<li> <code>PyMOL</code> streams aligned search results into your session
+<li> Interactively build motifs using search results
+<li> Validate modeled or designed structures against real crystal structures
+</div>
+<div class="span3">
+<img src="/img/suns-logo-small.png" alt="">
+</div>
+</div>
+</ul>
+<br />
+<h2>PyMOL Plugin</h2>
+The easiest way to use <code>Suns</code> is through the <code>PyMOL</code>
+plugin.
+<h3>Requirements</h3>
+<ul>
+<li> <code>PyMOL</code>
+<li> An internet connection (or a locally installed <code>Suns</code> search
+     engine)
+</ul>
+<br />
+<h3>Installation</h3>
+<a class="btn btn-large btn-primary"
+   href="/file/suns.zip">
+<i class="icon-download icon-large"></i> Download Plugin
+</a><br />
+<br />
+<br />
+<ul>
+<li> Download the <code>Suns</code> plugin (<code>suns.zip</code>).
+<li> Open <code>PyMOL</code>
+<li> Select <code>Plugin -> Plugin Manger</code> from the menu
+<li> Go to the <code>Install New Plugin</code> tab
+<li> Click <code>Choose file...</code> and select the downloaded plugin
+(<code>suns.zip</code>)
+</ul>
+<br />
+<h3>Tutorial</h3>
+Start <code>PyMOL</code> and load the structure for glucose binding protein (PDB
+ID: <code>2GBP</code>).  You can either:<br />
+<br />
+<ul>
+<li> use the <code>Plugin -> PDB Loader Service</code> menu option and choose
+<code>2gbp</code>, or 
+<li> type <code>fetch 2gbp</code> at the <code>PyMOL</code> command prompt.
+</ul>
+<br />
+<ul class="thumbnails centered-text">
+<li class="span4">
+<div class="thumbnail">
+<img src="/img/gbp.png" alt="">
+<p>Glucose binding protein - PDB ID <code>2gbp</code></p>
+</div>
+</li>
+</ul>
+Select the <code>Plugin -> Suns Search</code> menu option to open the search
+wizard, which lets you build and submit structural search queries:<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span8">
+<div class="thumbnail">
+<img src="/img/menu.png" alt="">
+<p>The wizard menu</p>
+</div>
+</li>
+<li class="span4">
+<div class="thumbnail">
+<img src="/img/wizard.png" alt="">
+<p>The search wizard</p>
+</div>
+</li>
+</ul>
+Left-click a carboxyl group to select it and add it to your search query:<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span4">
+<div class="thumbnail">
+<img src="/img/carboxyl.png" alt="">
+<p>Selected carboxyl group</p>
+</div>
+</ul>
+<code>Suns</code> pre-indexes chemical motifs from protein structures and the
+<code>PyMOL</code> search wizard automatically expands your selection to
+pre-indexed motifs, including:<br />
+<br />
+<ul>
+<li> carboxyls,
+<li> peptides,
+<li> hydroxyls, and
+<li> phenyl groups.
+</ul>
+Click "Search" to search for the carboxyl motif.  The search wizard contacts the
+public search engine at <code>suns.degradolab.org</code> and streams in aligned
+search results:<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span8">
+<div class="thumbnail">
+<img src="/img/carboxyl-search.png" alt="">
+<p>Carboxyl search results</p>
+</div>
+</ul>
+<code>PyMOL</code> uniquely colors each new result, but you can impose a uniform
+coloring by setting all carbons to green:<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span4">
+<div class="thumbnail">
+<img src="/img/color.png" alt="">
+<p>Set the backbone to green</p>
+</div>
+</li>
+<li class="span8">
+<div class="thumbnail">
+<img src="/img/carboxyl-search-green.png" alt="">
+<p>The re-colored search results</p>
+</div>
+</li>
+</ul>
+Some motifs match multiple residues.  For example, the carboxyl search query
+will match carboxyls from both aspartate acid and glutamate.<br />
+<br />
+Other motifs uniquely identify residues, such as linkers.  Click on any search
+result's linker and the wizard will expand the selection to include the
+remainder of the side chain.  The linker uniquely identifies the residue as
+aspartate or glutamate.<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span4">
+<div class="thumbnail">
+<img src="/img/add-linker.png" alt="">
+<p>Selection expanded to include linker</p>
+</div>
+</li>
+</ul>
+<code>Suns</code> saves search results that you add to your search query by
+renaming them to end with <code>_save</code> so that future searches don't
+delete them.<br />
+<br />
+Click "Search" to search for the expanded selection.  The new search will
+automatically delete old search results.  To save them, you must copy them to
+a new object.  You can also remove results manually at any time using "Clear
+Results".<br />
+<br />
+The search engine will return several less-than-perfect matches since searches
+default to an RMSD cutoff of 1.0 Angstroms:<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span4">
+<div class="thumbnail">
+<img src="/img/search-1.0.png" alt="">
+<p>Loose results</p>
+</div>
+</li>
+</ul>
+Use the "RMSD Cutoff" option to improve the result quality.  Set the RMSD to 0.1
+Angstroms and redo the search, which will considerably tighten up the linker:
+<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span4">
+<div class="thumbnail">
+<img src="/img/rmsd.png" alt="">
+<p>Change the RMSD Cutoff to 0.1 Angstroms</p>
+</div>
+</li>
+<li class="span4">
+<div class="thumbnail">
+<img src="/img/search-0.1.png" alt="">
+<p>Tight results</p>
+</div>
+</li>
+</ul>
+You don't have to limit yourself to contiguous motifs.  You can search for
+disconnected elements, too.  Let's hide everything except aspartate and arginine
+to find a candidate salt bridge:<br />
+<br />
+<pre>
+hide everything, not (resn arg or suns_query)
+</pre>
+This reveals a cluster of arginines:<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span8">
+<div class="thumbnail">
+<img src="/img/args.png" alt="">
+<p>Cluster of arginines near the aspartate</p>
+</div>
+</li>
+</ul>
+Pick any arginine's guanidinium group and loosen the search cutoff to 0.5 RMSD
+to search for geometrically similar salt bridges:<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span8">
+<div class="thumbnail">
+<img src="/img/salt-bridge.png" alt="">
+<p>Several identical salt bridge matches</p>
+</div>
+</li>
+</ul>
+Search results only bring in a 15 Angstrom cube around the match, but sometimes
+we desire more context for a given search result.  To pull in the original
+structure, just disable all selections except the desired result(s) and click
+"Fetch Full Contexts":<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span4">
+<div class="thumbnail">
+<img src="/img/enable-one.png" alt="">
+<p>Enable the selections you wish to expand</p>
+</div>
+</li>
+<li class="span4">
+<div class="thumbnail">
+<img src="/img/fetch.png" alt="">
+<p>Click "Fetch Full Contexts"</p>
+</div>
+</li>
+</ul>
+This will fetch the original structures from the Protein Data Bank and align
+them to their respective results:<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span6">
+<div class="thumbnail">
+<img src="/img/before-context.png" alt="">
+<p>Before adding context</p>
+</div>
+</li>
+<li class="span6">
+<div class="thumbnail">
+<img src="/img/after-context.png" alt="">
+<p>After adding context</p>
+</div>
+</li>
+</ul>
+<code>Suns</code> also supports backbone peptide searches.  Reset the wizard by
+clicking:<br />
+<br />
+<ul>
+<li> Clear Results: Removes search results ending with <code>_result</code>
+<li> Clear Selection: Empties the <code>suns_query</code> selection
+<li> Clear Saved: Removes saved results ending with <code>_save</code>
+<li> Clear Contexts: Removes fetched contexts ending with <code>_fetch</code>
+</ul>
+Then type:<br />
+<br />
+<pre>
+show all
+</pre>
+Now select two consecutive peptide bonds from a helix and search with a cutoff
+of 0.3 Angstroms.  The search results extend the initial query for several
+helical turns in each direction:<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span8">
+<div class="thumbnail">
+<img src="/img/helix.png" alt="">
+<p>Inferred helical context</p>
+</div>
+</li>
+</ul>
+You can also search for residues V207 and V232 and include both the valine
+and backbone atoms in your search query:
+in the preferred surrounding backbone:<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span8">
+<div class="thumbnail">
+<img src="/img/beta-val-sel.png" alt="">
+<p>Double valine selection</p>
+</div>
+</li>
+</ul>
+Searching at 0.4 Angstrom RMSD cutoff brings in an entire beta sheet worth of
+context:<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span8">
+<div class="thumbnail">
+<img src="/img/beta-val.png" alt="">
+<p>Inferred beta sheet context</p>
+</div>
+</li>
+</ul>
+<code>Suns</code> plays well with other <tt>PyMOL</tt> wizards, including the
+mutagenesis wizard.  We can combine the two wizards to infer contextual
+preferences for different rotamers.<br />
+<br />
+Use the mutagenesis wizard to rotate V232 counterclockwise and repeat the
+search:<br />
+<br />
+<ul class="thumbnails centered-text">
+<li class="span8">
+<div class="thumbnail">
+<img src="/img/rot-val.png" alt="">
+<p>Only one match to the search query</p>
+</div>
+</li>
+</ul>
+The number of matches drops precipitously, indicating an unfavorable motif.  You
+can use <code>Suns</code> as a crude measure of the quality of modeled or
+designed protein motifs.<br />
+<br />
+<br />
+<h2>Command Line Client</h2>
+<code>suns-cmd</code> is a command line client to the Suns protein search
+engine.  Use <code>suns-cmd</code> to automate searches for scripting purposes.
+<br />
+<br />
+<h3>Installation</h3>
+You can install the command line client from the following source package:<br />
+<br />
+<a class="btn btn-large btn-primary"
+   href="/file/suns-cmd-1.0.0.tar.gz">
+<i class="icon-download icon-large"></i> Download suns-cmd source
+</a>
+<br />
+<br />
+To install the source package, first install the
+<a href="http://www.haskell.org/platform/">Haskell Platform</a>.<br />
+<br />
+<pre>
+$ cabal update
+$ cabal install
+</pre>
+<br />
+<h3>Quick Start</h3>
+To use <code>suns-cmd</code>, just create a directory to store the results:
+<br />
+<br />
+<pre>
+$ mkdir results
+</pre>
+<br />
+... and feed in the motif to search to the program's standard input.  This
+source package provides example motifs in the <code>test/</code> subdirectory:
+<br />
+<br />
+<pre>
+$ ~/.cabal/bin/suns-cmd -d results/ -r 0.2 < test/figure2/search1.pdb
+</pre>
+<br />
+The <code>-d</code> parameter tells the program to store all results in the
+<code>results/</code> directory:<br />
+<br />
+<pre>
+$ ls results
+1tqg_0.pdb   1v7w_2.pdb  2fr5_1.pdb  3a6r_0.pdb   3cuz_1.pdb  3fke_0.pdb
+1tqg_1.pdb   1v7w_3.pdb  2fr5_2.pdb  3a6r_1.pdb   3cuz_2.pdb  3fke_1.pdb
+...
+</pre>
+<br/>
+Each result is labeled by the structure name followed by a number which
+distinguishes results originating from the same structure.  These results are
+already aligned to the original search query.<br />
+<br />
+This program also accepts the following options:<br />
+<br />
+<pre>
+suns-cmd: The Suns search command line client
+
+Usage: suns-cmd [--hostname STRING] [-r|--rmsd DOUBLE] [-n|--num INT] [-s|--seed INT] [-d|--directory FILEPATH]
+  Send search requests and store results as PDB files
+
+Available options:
+  -h,--help                Show this help text
+  --hostname STRING        Search engine address (default: suns.degradolab.org)
+  -r,--rmsd DOUBLE         RMSD cutoff (default: 1.0)
+  -n,--num INT             Number of results (default: 100)
+  -s,--seed INT            Randomization seed (default: 0)
+  -d,--directory FILEPATH  Results directory (default: ./)
+
+Report bugs to suns-search@googlegroups.com
+</pre>
+<br />
+<h2>Search Engine</h2>
+<br />
+The public <code>Suns</code> server at <code>suns.degradolab.org</code> imposes
+three limitations in order to handle a high search volume:<br />
+<br />
+<ul>
+<li> Queries must fit inside a 15 Angstrom box
+<li> You can only search on pre-defined protein substructures
+<li> Searches time out after 10 seconds
+</ul>
+If you set up your own local search engine, you can bypass these limitations,
+allowing you to:<br />
+<br />
+<ul>
+<li> Change the database of indexed protein structures
+<li> Index ligands or alternative protein substructures
+<li> Run search queries without time limits
+</ul>
+For instructions on how to do this, download the source package at
+<a href="https://github.com/Gabriel439/suns-search">https://github.com/Gabriel439/suns-cmd</a> and follow the instructions to build and customize your own local
+search engine.<br />
+<br />
+<h2>Support</h2>
+<br />
+To report bugs, request features, or ask for support, contact the official
+mailing list at <code>suns-search@googlegroups.com</code>.
+</div>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
